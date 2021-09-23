@@ -18,7 +18,9 @@ app.use(cors());
 app.use("/v1", userRoutes);
 
 // --------------------------deployment------------------------------
-const __dirname = path.resolve();
+const __dirname = path.resolve(
+  path.dirname(decodeURI(new URL(import.meta.url).pathname))
+);
 
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === "production") {

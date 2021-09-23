@@ -10,7 +10,6 @@ import Button from "components/Button";
 import Input from "components/Inputs/Input";
 import Card from "components/Card";
 import AuthService from "services/auth.service";
-import { CLIEngine } from "eslint";
 
 export const SignIn = () => {
   const { push } = useHistory();
