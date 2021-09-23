@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useFormikContext } from "formik";
 
 export default function useFieldHasError(fieldName) {

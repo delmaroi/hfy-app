@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledCard, Overlay, Text } from "./styles";
@@ -15,6 +16,6 @@ export default function Card({ children, title }: PropTypes) {
 }
 
 type PropTypes = {
-  title: string,
-  children: React.ReactNode,
+  title: string;
+  children: React.ReactNode;
 };

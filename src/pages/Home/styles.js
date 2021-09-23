@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { color, flexbox, layout, space, typography } from "styled-system";
 
 export const Wrapper = styled.div`
   max-width: 600px;
@@ -9,4 +10,16 @@ export const Wrapper = styled.div`
   justify-items: center;
   justify-content: center;
   margin: auto;
+  flex-direction: column;
+`;
+
+export const Text = styled.p`
+  font-weight: normal;
+  text-align: left;
+  margin: 0;
+  ${color}
+  ${flexbox}
+  ${layout}
+  ${space}
+  ${typography}
 `;

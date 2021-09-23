@@ -1,6 +1,7 @@
 import React from "react";
 import { Wrapper, StyledLink } from "./styles";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const Footer = ({ text, route }: TProps) => {
   return (
     <Wrapper>

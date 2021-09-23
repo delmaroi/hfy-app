@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import SignIn from "pages/SignIn";

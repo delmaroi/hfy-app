@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 const BIRTH_DATE_FORMAT = "YYYY-MM-DD";
 const MAX_AGE = 120;
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default function authHeader() {
   const user = JSON.parse(localStorage.getItem("user"));
 

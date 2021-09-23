@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
@@ -22,6 +23,7 @@ export const SignIn = () => {
   };
 
   const handleSubmit = (values) => {
+    console.log(values, "values");
     setErrorMessage();
     setLoading(true);
 
@@ -40,55 +42,49 @@ export const SignIn = () => {
       }
     );
   };
-
+  console.log(loading, "loading");
   return (
-    <>
-      <Card title="Sing In">
-        {loading && <div>Loading...</div>}
+    <Card title="Sing In">
+      {loading && <div>Loading...</div>}
 
-        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {({ isSubmitting, dirty, isValid }) => {
-            console.log(isSubmitting, "dddd");
-            return (
-              <Form>
-                <Input
-                  id="email"
-                  name="email"
-                  label="Email"
-                  placeholder="example@company.com"
-                  validate={composeValidators(
-                    email,
-                    makeRequired("Please enter a valid email address")
-                  )}
-                />
-                <Input
-                  id="password"
-                  name="password"
-                  label="Password"
-                  type="password"
-                  validate={makeRequired("Please enter a valid password")}
-                />
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        enableReinitialize
+      >
+        {() => (
+          <Form>
+            <Input
+              id="email"
+              name="email"
+              label="Email"
+              placeholder="example@company.com"
+              validate={composeValidators(
+                email,
+                makeRequired("Please enter a valid email address")
+              )}
+            />
+            <Input
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              validate={makeRequired("Please enter a valid password")}
+            />
 
-                <ContentWrapper>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    loading={isSubmitting}
-                    disabled={!(isValid && dirty) || isSubmitting}
-                  >
-                    Submit
-                  </Button>
-                </ContentWrapper>
-              </Form>
-            );
-          }}
-        </Formik>
+            <ContentWrapper>
+              <Button type="primary" htmlType="submit" disabled={loading}>
+                Submit
+              </Button>
+            </ContentWrapper>
+          </Form>
+        )}
+      </Formik>
 
-        <Footer text="Sign Up" route="sign-up" />
-      </Card>
-    </>
+      <Footer text="Sign Up" route="sign-up" />
+    </Card>
   );
 };
 

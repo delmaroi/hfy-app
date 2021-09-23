@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from "axios";
-
-const API_URL = "http://localhost:5000/v1/api/";
+import { API_URL } from "./constants";
 
 const signup = ({
   firstname,

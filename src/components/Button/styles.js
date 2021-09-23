@@ -18,7 +18,6 @@ export const StyledButton = styled(Button)`
   font-weight: 600;
   border: 1px solid #ccc;
   margin-top: 8px;
-  padding-left: 8px;
   border-radius: 4px;
   align-items: center;
   color: white;

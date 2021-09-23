@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from "react";
 import UserService from "services/user.service";
+import AuthService from "services/auth.service";
 import Header from "components/Header";
-import { Wrapper } from "./styles";
+import { Wrapper, Text } from "./styles";
 
 export const Home = () => {
   const [content, setContent] = useState();
+  const user = AuthService.getCurrentUser();
 
   useEffect(() => {
     UserService.getPublicContent().then(
@@ -24,7 +27,9 @@ export const Home = () => {
     <>
       <Header />
 
-      <Wrapper>Zalogowany</Wrapper>
+      <Wrapper>
+        <div>Zalogowany {user.email}</div>
+      </Wrapper>
     </>
   );
 };

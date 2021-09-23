@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import AuthService from "services/auth.service";
 import { Container, Nav, StyledLink } from "./styles";
 
