@@ -34,7 +34,7 @@ export function styleInput(InputComponent) {
     padding-left: 10px;
     border-radius: 4px;
     font-size: 14px;
-    height: 24px;
+    height: 32px;
     display: flex;
     width: 100%;
 
