@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Helmet from "react-helmet";
 import UserService from "services/user.service";
 import Header from "components/Header";
 import { Wrapper } from "./styles";
@@ -23,10 +22,9 @@ export const Home = () => {
 
   return (
     <>
-      <Helmet title="Home" />
       <Header />
 
-      <Wrapper>Zalogowany jako {content.email}</Wrapper>
+      <Wrapper>Zalogowany</Wrapper>
     </>
   );
 };
