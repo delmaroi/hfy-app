@@ -47,7 +47,7 @@ export const Home = () => {
 
               {content &&
                 content.map((user) => (
-                  <Text key="user.id">
+                  <Text key={user._id}>
                     {user.firstname}: {user.email}
                   </Text>
                 ))}
