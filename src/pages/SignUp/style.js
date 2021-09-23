@@ -1,12 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  max-width: 600px;
-  min-height: 600px;
-  padding: 0 20px;
+export const ErrorMessage = styled.div`
+  color: red;
+`;
+
+export const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-items: center;
   justify-content: center;
-  margin: auto;
 `;

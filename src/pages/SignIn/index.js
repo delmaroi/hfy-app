@@ -1,50 +1,95 @@
-import React from "react";
-import Helmet from "react-helmet";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
-import { Wrapper, Page } from "./style";
+import { ContentWrapper, ErrorMessage } from "./style";
+import composeValidators from "utils/validators/composeValidators";
+import makeRequired from "utils/validators/makeRequired";
+import email from "utils/validators/email";
+import Footer from "components/Footer";
+import Button from "components/Button";
+import Input from "components/Inputs/Input";
+import Card from "components/Card";
+import AuthService from "services/auth.service";
+import { CLIEngine } from "eslint";
 
 export const SignIn = () => {
   const { push } = useHistory();
   const { state } = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+  const initialValues = {
+    email: "",
+    password: "",
+  };
 
-  const handleSubmit = async (response) => {
-    push(state?.from || "/home");
+  const handleSubmit = (values) => {
+    setErrorMessage();
+    setLoading(true);
+
+    AuthService.signin({ ...values }).then(
+      () => {
+        setLoading(false);
+
+        push(state?.from || "/home");
+      },
+      (error) => {
+        const resMessage =
+          error?.response?.data?.message || error.message || error.toString();
+
+        setErrorMessage(resMessage);
+        setLoading(false);
+      }
+    );
   };
 
   return (
-    <Page>
-      <Helmet title="Sign in" />
+    <>
+      <Card title="Sing In">
+        {loading && <div>Loading...</div>}
 
-      <Wrapper>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {({ isSubmitting, values }) => (
-            <Form>
-              <FormItem>
-                <Field
-                  autoComplete="email"
-                  id="loginEmail"
+          {({ isSubmitting, dirty, isValid }) => {
+            console.log(isSubmitting, "dddd");
+            return (
+              <Form>
+                <Input
+                  id="email"
                   name="email"
-                  type="email"
-                  label="Email address"
-                  validate={composeValidators(emailValidator)}
-                  component={Input}
+                  label="Email"
+                  placeholder="example@company.com"
+                  validate={composeValidators(
+                    email,
+                    makeRequired("Please enter a valid email address")
+                  )}
                 />
-              </FormItem>
+                <Input
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  validate={makeRequired("Please enter a valid password")}
+                />
 
-              <Button
-                block
-                data-test-id="continue-button"
-                disabled={!values.email}
-                loading={isSubmitting}
-                type="submit"
-              >
-                Continue
-              </Button>
-            </Form>
-          )}
+                <ContentWrapper>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={isSubmitting}
+                    disabled={!(isValid && dirty) || isSubmitting}
+                  >
+                    Submit
+                  </Button>
+                </ContentWrapper>
+              </Form>
+            );
+          }}
         </Formik>
-      </Wrapper>
-    </Page>
+
+        <Footer text="Sign Up" route="sign-up" />
+      </Card>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ const signInUser = asyncHandler(async (req, res) => {
   if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
-      name: user.name,
+      firstname: user.firstname,
       email: user.email,
       token: generateToken(user._id),
     });
@@ -70,19 +70,29 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User not found");
   }
-
-  // const newUser = new User({
-  //   email,
-  //   name,
-  //   lastname,
-  //   password,
-  //   dateBirth,
-  // });
-
-  newUser
-    .save()
-    .then(() => res.json("User successfully registered!"))
-    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-export { signInUser, signOutUser, registerUser };
+// @desc    Get logged in user
+// @route   GET /api/users
+// @access  Private
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({ user: req.user._id });
+  res.json(users);
+});
+
+//@description     Fetch single user
+//@route           GET /api/user/:id
+//@access          Public
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404).json({ message: "user not found" });
+  }
+
+  res.json(user);
+});
+
+export { signInUser, signOutUser, registerUser, getUsers, getUserById };

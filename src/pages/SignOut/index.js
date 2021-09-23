@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 export default function SignOut() {
-  const { replace } = useHistory();
+  const { state } = useLocation();
+  const { push } = useHistory();
 
   useEffect(() => {
-    replace("/sign-in");
+    push(state?.from || "/sign-in");
   }, []);
 
   return null;
