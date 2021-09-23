@@ -23,7 +23,6 @@ export const SignIn = () => {
   };
 
   const handleSubmit = (values) => {
-    console.log(values, "values");
     setErrorMessage();
     setLoading(true);
 
@@ -42,7 +41,7 @@ export const SignIn = () => {
       }
     );
   };
-  console.log(loading, "loading");
+
   return (
     <Card title="Sing In">
       {loading && <div>Loading...</div>}
